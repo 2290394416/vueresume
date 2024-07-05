@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { reactive, ref, watch } from 'vue';
   import { Form } from 'ant-design-vue';
-  import { DownOutlined } from '@ant-design/icons-vue';
+  import { DownOutlined, RedoOutlined } from '@ant-design/icons-vue';
 
   
   const onFinish = (values: any) => {
@@ -137,7 +137,7 @@
         <a-form-item style="margin: 16px;" :wrapper-col="{ span: 16, offset: 12 }">
           <a-space>
             <a-button type="primary"  @click="onSubmit">搜索</a-button>
-            <a-button @click="reset">重置</a-button>
+            <a-button @click="reset"><RedoOutlined />重置</a-button>
           </a-space>
         </a-form-item>
       </a-form>

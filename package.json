@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
+    "@vueuse/core": "^10.11.0",
     "ant-design-vue": "^4.2.3",
+    "echarts": "^5.5.1",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },

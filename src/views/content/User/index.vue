@@ -4,7 +4,11 @@
   import Deparment from '@/views/content/User/Deparment.vue';
   import Filter from '@/views/content/User/Filter.vue'
   import Edit from '@/views/content/User/Edit.vue'
-  import { UploadOutlined } from '@ant-design/icons-vue'
+  import { UploadOutlined, CopyOutlined } from '@ant-design/icons-vue'
+  import { useClipboard } from '@vueuse/core'
+
+  const { copy } = useClipboard()
+
     const columns = [
       {
         title: '编号',
@@ -95,6 +99,7 @@
         show: false,
       }
     ];
+    //获取唯一 key 值
     function getUniqueKey(){
       let idStr = Date.now().toString(36)
       idStr += Math.random().toString(36).substr(2)
@@ -114,19 +119,10 @@
     const onSelectChange = (selectedRowKeys: Key[]) => {
       state.selectedRowKeys = selectedRowKeys;
     };
-    const checkDel = () => {
-      state.loading = true;
-      var newArr = newData.value.filter((item) => !state.selectedRowKeys.includes(item.key))
-      newData.value = newArr
-      setTimeout(() => {
-        state.loading = false;
-        state.selectedRowKeys = [];
-      }, 1000);
-    };
+    
     
     const newData = ref(data)
-    const search = ref()
-    const onChange = (list: any) => {
+    const onSearch = (list: any) => {
       newData.value = list
     }
     const open = ref(false)
@@ -136,8 +132,19 @@
     function create(add: any) {
       let obj = { key: getUniqueKey(), show: false, ...add}
       newData.value.push(obj)
-      data.push(obj)
+      if(newData.value.length !== data.length) {
+        data.push(obj)
+      }
     }
+    const checkDel = () => {
+      state.loading = true;
+      setTimeout(() => {
+        var newArr = newData.value.filter((item) => !state.selectedRowKeys.includes(item.key))
+        newData.value = newArr
+        state.loading = false;
+        state.selectedRowKeys = [];
+      }, 1000);
+    };
     const onEdit = (state: any, index: number) => {
       newData.value.splice(index, 1, state)
       data=newData.value
@@ -149,9 +156,9 @@
 <template>
   <div>
     <Edit :show="open" @close-drawer="closeDrawer" @on-change="create"/>
-    <Deparment :data="data" @filter-list="onChange"/>
+    <Deparment :data="data" @filter-list="onSearch"/>
     <div class="user">
-      <Filter :data='data' @filter-list="onChange"/>
+      <Filter :data='data' @filter-list="onSearch"/>
       <div class="user_list">
         <div class="operation">
           <a-space>
@@ -184,6 +191,12 @@
               <template v-else-if="column.key === 'name'">
                 <div>
                   {{ record.name }}
+                </div>
+              </template>
+              <template v-else-if="column.key === 'phone'">
+                <div>
+                  {{ record.phone }}
+                  <CopyOutlined @click="copy(record.phone)"/>
                 </div>
               </template>
               <template v-else-if="column.key === 'status'">

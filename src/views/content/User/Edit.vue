@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import { onMounted, reactive, ref, toRaw, watch } from 'vue';
+import { ref, toRaw, watch } from 'vue';
 import type { Rule } from 'ant-design-vue/es/form';
 import { Form } from 'ant-design-vue';
+import {RedoOutlined} from '@ant-design/icons-vue'
+
 
 const form = ref({
   name: '',
@@ -29,20 +31,24 @@ const emit = defineEmits(['onChange', 'closeDrawer'])
 if (props.edit) {
   form.value = props.edit
 }
-const useForm = Form.useForm
 
-watch(props,(props) => {
-  open.value = props.show
+watch(() => props.show,(show) => {
+  open.value = show
+  console.log(show)
 })
 
+const useForm = Form.useForm
 const { validate, resetFields} = useForm(form)
 
 const onClose = () => {
   open.value = false
   emit("closeDrawer")
+  console.log('执行了')
 };
 function reset() {
+  props.edit.show = true
   resetFields()
+  console.log(props.edit)
 }
 function submit() {
   validate()
@@ -69,7 +75,7 @@ function submit() {
     :footer-style="{ textAlign: 'right' }"
     @close="onClose"
   >
-    <a-form :model="form" :rules="rules" layout="horizontal">
+    <a-form :model="form" ref="formRef" :rules="rules" layout="horizontal">
       <a-form-item label="用户名" name="name">
         <a-input v-model:value="form.name" placeholder="请输入用户名" />
       </a-form-item>
@@ -113,7 +119,7 @@ function submit() {
     </a-form>
     <template #footer>
       <a-space>
-        <a-button @click="reset">重置</a-button>
+        <a-button @click="reset"><RedoOutlined />重置</a-button>
         <a-button type="primary" @click="submit">提交</a-button>
       </a-space>
     </template>

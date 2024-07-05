@@ -37,8 +37,8 @@ const items = reactive([
         path: '/home/system/user'
       }, {
         key: 'system2',
-        label: '角色管理',
-        title: '角色管理',
+        label: '职位管理',
+        title: '职位管理',
         path: '/home/system/role'
       }, {
         key: 'system3',
