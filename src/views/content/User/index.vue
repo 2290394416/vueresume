@@ -141,6 +141,7 @@
       setTimeout(() => {
         var newArr = newData.value.filter((item) => !state.selectedRowKeys.includes(item.key))
         newData.value = newArr
+        data = newData.value
         state.loading = false;
         state.selectedRowKeys = [];
       }, 1000);
@@ -151,6 +152,7 @@
     }
     const onDelete = (key: string) => {
       newData.value = newData.value.filter(item => item.key !== key);
+      data = newData.value
     };
 </script>
 <template>
