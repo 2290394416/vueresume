@@ -2,6 +2,7 @@
 import { computed, reactive, ref } from 'vue';
 import { Form } from 'ant-design-vue';
 import PositionEditor from '@/views/content/Role/PositionEditor.vue';
+import Permissions from '@/views/content/Role/Permissions.vue'
 
   const open = ref(false)
 
@@ -116,13 +117,21 @@ import PositionEditor from '@/views/content/Role/PositionEditor.vue';
   }
   function checkDel() {
     state.loading = true
+    setTimeout(() => {
+      let newArr = newData.value.filter((item) => !state.selectedRowKeys.includes(item.key))
+      newData.value = newArr
+      data = newData.value
+      state.loading = false;
+      state.selectedRowKeys = [];
+    }, 1000);
   }
   function onEdit(state: any, index: number) {
     newData.value.splice(index, 1, state)
     data=newData.value
   }
-  function onDelete(del: any) {
-
+  function onDelete(key: any) {
+    newData.value = newData.value.filter((item: any) => item.key !== key)
+    data = newData.value
   }
 </script>
 
@@ -180,6 +189,7 @@ import PositionEditor from '@/views/content/Role/PositionEditor.vue';
         <template v-else-if="column.key === 'action'">
           <span>
             <a >分配权限</a>
+            <Permissions :show="record.permissions"/>
             <a-divider type="vertical" />
             <a @click="record.show = true">编辑</a>
             <PositionEditor :show='record.show' :edit="record" @close-drawer="record.show = false" :index="index" @on-change="onEdit"/>

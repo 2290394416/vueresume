@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, toRaw, watch } from 'vue';
+import { computed, ref, toRaw, watch } from 'vue';
 import { Form } from 'ant-design-vue';
 import {RedoOutlined} from '@ant-design/icons-vue'
 
@@ -8,6 +8,10 @@ const form = ref({
   encoding: '',
   status: '',
 });
+const push = ref(false)
+const disabled = computed(() => {
+  return !(form.value.name && form.value.encoding && form.value.status)
+})
 
 const open = ref<boolean>(false);
 const props = defineProps(['show', 'edit', 'index'])
@@ -26,16 +30,25 @@ const { validate, resetFields} = useForm(form)
 const onClose = () => {
   open.value = false
   emit("closeDrawer")
+  if (props.edit && !push.value) {
+    console.log('执行力')
+    form.value = props.edit
+  }
 };
 function reset() {
-  resetFields()
-  console.log(form.value)
+  form.value = {
+    name: '',
+    encoding: '',
+    status: '',
+  }
 }
 function submit() {
   validate()
   .then(() => {
+    push.value = true;
     emit('onChange', form.value, props.index)
     console.log(toRaw(form.value));
+    onClose()
     if(!props.edit) {
       resetFields()
     }
@@ -43,7 +56,7 @@ function submit() {
   .catch(err => {
     console.log('error',err)
   })
-  onClose()
+  push.value = false
 }
 </script>
 
@@ -73,7 +86,7 @@ function submit() {
     <template #footer>
       <a-space>
         <a-button @click="reset"><RedoOutlined />重置</a-button>
-        <a-button type="primary" @click="submit">提交</a-button>
+        <a-button type="primary" @click="submit" :disabled="disabled">提交</a-button>
       </a-space>
     </template>
   </a-modal>
