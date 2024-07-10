@@ -4,28 +4,32 @@
 
   const open = ref(false)
   const props = defineProps(['show'])
-
-  watch(props,(show) => {
+  const emit = defineEmits(['onClose'])
+  watch(() => props.show,(show) => {
     open.value = show
   })
+
   const treeData: TreeProps['treeData'] = [
     {
-      title: 'parent 1',
+      title: '系统管理',
       key: '0-0',
       children: [
         {
-          title: 'parent 1-0',
+          title: '用户管理',
           key: '0-0-0',
-          disabled: true,
+          // disabled: true,
           children: [
-            { title: 'leaf', key: '0-0-0-0', disableCheckbox: true },
-            { title: 'leaf', key: '0-0-0-1' },
+            { title: '用户查询', key: '0-0-0-0' },
+            { title: '用户新增', key: '0-0-0-1' },
           ],
         },
         {
-          title: 'parent 1-1',
+          title: '职位管理',
           key: '0-0-1',
-          children: [{ key: '0-0-1-0', title: 'sss' }],
+          children: [
+            { title: '职位查询', key: '0-0-1-0' },
+            { title: '职位新增', key: '0-0-1-1' }
+          ],
         },
       ],
     },
@@ -46,12 +50,13 @@ watch(checkedKeys, () => {
 
 function onClose() {
   open.value = false
+  emit('onClose')
 }
 </script>
 
 <template>
   <a-drawer
-    title="新增用户"
+    title="权限分配"
     :width="350"
     :open="open"
     :body-style="{ paddingBottom: '80px' }"
@@ -59,16 +64,16 @@ function onClose() {
     @close="onClose"
   >
     <a-tree
-    v-model:expandedKeys="expandedKeys"
-    v-model:selectedKeys="selectedKeys"
-    v-model:checkedKeys="checkedKeys"
-    checkable
-    :tree-data="treeData"
-  >
-    <template #title="{ title, key }">
-      <span v-if="key === '0-0-1-0'" style="color: #1890ff">{{ title }}</span>
-      <template v-else>{{ title }}</template>
-    </template>
-  </a-tree>
+      v-model:expandedKeys="expandedKeys"
+      v-model:selectedKeys="selectedKeys"
+      v-model:checkedKeys="checkedKeys"
+      checkable
+      :tree-data="treeData"
+    >
+      <template #title="{ title, key }">
+        <span v-if="key === '0-0-1-0'" style="color: #1890ff">{{ title }}</span>
+        <template v-else>{{ title }}</template>
+      </template>
+    </a-tree>
   </a-drawer>
 </template>

@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import IndexView from '../views/IndexView.vue'
-import Home from '@/views/Home.vue'
 
 import User from '@/views/content/User/index.vue'
 import Role from '@/views/content/Role/index.vue'
@@ -19,36 +18,21 @@ const router = createRouter({
       path: '/home',
       name: 'home',
       component: HomeView,
-      children: [
-        {
-          path: '',
-          name: 'home',
-          component: Home,
-          children: [
-            {
-              path: '',
-              name: 'homeContent',
-              component: () => import('@/views/content/HomeContent/index.vue')
-            }, {
-              path: 'about',
-              name: 'about',
-              component: () => import('../views/AboutView.vue')
-            }, {
-              path: 'system/user',
-              name: 'user',
-              component: User
-            }, {
-              path: 'system/role',
-              name: 'role',
-              component: Role
-            }, {
-              path: 'active',
-              name: 'active',
-              component: () => import('../views/ActiveView.vue')
-            }
-          ]
-        },
-      ]
+        children: [
+          {
+            path: '',
+            name: 'homeContent',
+            component: () => import('@/views/content/HomeContent/index.vue')
+          }, {
+            path: 'system/user',
+            name: 'user',
+            component: User,
+          }, {
+            path: 'system/role',
+            name: 'role',
+            component: Role
+          }
+        ]
     },
      {
       path: '/:pathMatch(.*)*',

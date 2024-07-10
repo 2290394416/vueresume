@@ -188,8 +188,8 @@ import Permissions from '@/views/content/Role/Permissions.vue'
         </template>
         <template v-else-if="column.key === 'action'">
           <span>
-            <a >分配权限</a>
-            <Permissions :show="record.permissions"/>
+            <a @click="record.permissions = true">分配权限</a>
+            <Permissions :show="record.permissions" @on-close="record.permissions=false"/>
             <a-divider type="vertical" />
             <a @click="record.show = true">编辑</a>
             <PositionEditor :show='record.show' :edit="record" @close-drawer="record.show = false" :index="index" @on-change="onEdit"/>
