@@ -4,10 +4,10 @@ import IndexView from '../views/IndexView.vue'
 
 import User from '@/views/content/User/index.vue'
 import Role from '@/views/content/Role/index.vue'
+import Dept from '@/views/content/Dept/index.vue'
 
 const router = createRouter({
-  // import.meta.env.BASE_URL
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
@@ -18,23 +18,27 @@ const router = createRouter({
       path: '/home',
       name: 'home',
       component: HomeView,
-        children: [
-          {
-            path: '',
-            name: 'homeContent',
-            component: () => import('@/views/content/HomeContent/index.vue')
-          }, {
-            path: 'system/user',
-            name: 'user',
-            component: User,
-          }, {
-            path: 'system/role',
-            name: 'role',
-            component: Role
-          }
-        ]
+      children: [
+        {
+          path: '',
+          name: 'homeContent',
+          component: () => import('@/views/content/HomeContent/index.vue')
+        }, {
+          path: 'system/user',
+          name: 'user',
+          component: User,
+        }, {
+          path: 'system/role',
+          name: 'role',
+          component: Role
+        }, {
+          path: 'system/dept',
+          name: 'dept',
+          component: Dept
+        }
+      ]
     },
-     {
+    {
       path: '/:pathMatch(.*)*',
       name: 'notFound',
       component: () => import('../views/NotFound.vue')

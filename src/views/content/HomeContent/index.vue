@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import Card from '@/views/content/HomeContent/Card.vue';
+import VistiTrend from '../HomeContent/VistiTrend.vue'
 import {BellFilled, PushpinFilled, HddFilled} from '@ant-design/icons-vue'
 
   const say = ref('上午好')
@@ -60,6 +61,9 @@ import {BellFilled, PushpinFilled, HddFilled} from '@ant-design/icons-vue'
   <div class="main">
     <Card />
   </div>
+  <div class="footer">
+    <VistiTrend />
+  </div>
 </template>
 
 <style scoped>
@@ -118,5 +122,11 @@ import {BellFilled, PushpinFilled, HddFilled} from '@ant-design/icons-vue'
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.5);
     margin-top: 16px;
+  }
+  .footer {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-top: 16px;
+    padding: 16px;
   }
 </style>

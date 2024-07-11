@@ -49,7 +49,7 @@
           key: 'system4',
           label: '部门管理',
           title: '部门管理',
-          path: '/system/role'
+          path: '/home/system/dept'
         }, {
           key: 'system5',
           label: '字典管理',
