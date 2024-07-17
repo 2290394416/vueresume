@@ -61,7 +61,7 @@ import { useRouter } from 'vue-router';
           <RouterLink
             id="nav_a"
             exactActiveClass="exact"
-            :to="item.path"
+            :to="`vueresume/${item.path}`"
             @click="onSwitch(item.key)"
             :style="item.title !== '首页' && { paddingRight: '35px'}"
           >{{item.title}}
