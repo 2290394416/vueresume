@@ -40,7 +40,6 @@
       let newdata = []
       if (modelRef.name) {
         newdata.push(...props.data.filter((item: any) => item.name === modelRef.name))
-        // newdata.push(...props.data.filter((item: any) => item.position === modelRef.name))
       }
       if (modelRef.status) {
         if (status.value !== '全部') {

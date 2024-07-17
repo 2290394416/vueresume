@@ -198,6 +198,7 @@
             :inline-collapsed="state.collapsed"
             :items="items"
             @click="handleclick"
+            scroll
           ></a-menu>
         </div>
       <div class="content">
