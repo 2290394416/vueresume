@@ -7,7 +7,7 @@ import { useRouter } from 'vue-router';
 
   const router = useRouter();
   function goIndex() {
-    router.push('/')
+    router.push('/vueresume/')
   }
 
  
