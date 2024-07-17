@@ -100,11 +100,13 @@
         if (modelRef.name) {
           searchData(data, 'name', modelRef.name)
         }
-        //如果前面
+        //如果name 有值，则从 name 过滤后的数据里查找
         if (modelRef.name) {
+          //‘全部’为默认情况，所以不操作
           if (modelRef.status !== '全部') {
             searchData(newData.value, 'status', modelRef.status)
           }
+          //如果name没有值，则从原数据中搜索
         } else if(!modelRef.name) {
           searchData(data, 'status', modelRef.status)
         }
