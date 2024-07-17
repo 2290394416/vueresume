@@ -13,7 +13,7 @@ import { useRouter } from 'vue-router';
  
   const routerList = ref([
     {
-      path: '/home',
+      path: '/vueresume/home',
       title: '首页',
       key: 'home'
     }
@@ -61,7 +61,7 @@ import { useRouter } from 'vue-router';
           <RouterLink
             id="nav_a"
             exactActiveClass="exact"
-            :to="`vueresume/${item.path}`"
+            :to="item.path"
             @click="onSwitch(item.key)"
             :style="item.title !== '首页' && { paddingRight: '35px'}"
           >{{item.title}}

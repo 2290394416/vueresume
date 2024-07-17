@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router';
 
    const router = useRouter()
    function gohome() {
-    router.push('/home')
+    router.push('/vueresume/home')
    }
 </script>
 

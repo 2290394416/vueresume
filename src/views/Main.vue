@@ -22,7 +22,7 @@
       icon: () => h(PieChartOutlined),
       label: '首页',
       title: '首页',
-      path: '/home'
+      path: '/vueresume/home'
     },
     {
       key: 'sub1',
@@ -34,12 +34,12 @@
           key:'system1',
           label: '用户管理',
           title: '用户管理',
-          path: '/system/user'
+          path: '/vueresume/home/system/user'
         }, {
           key: 'system2',
           label: '职位管理',
           title: '职位管理',
-          path: '/system/role'
+          path: '/vueresume/home/system/role'
         }, {
           key: 'system3',
           label: '菜单管理',
@@ -49,7 +49,7 @@
           key: 'system4',
           label: '部门管理',
           title: '部门管理',
-          path: '/system/dept'
+          path: '/vueresume/home/system/dept'
         }, {
           key: 'system5',
           label: '字典管理',
@@ -161,7 +161,7 @@
   import { useRouter } from 'vue-router';
   const router = useRouter()
   function handleclick(select: any) {
-    router.push(`vueresume/home/${select.item.path}`)
+    router.push(select.item.path)
     emit('onRouter', select)
   }
   onMounted(() => {

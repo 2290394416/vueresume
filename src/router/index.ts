@@ -15,7 +15,7 @@ const router = createRouter({
       component: IndexView,
     }, 
     {
-      path: '/home',
+      path: '/vueresume/home',
       name: 'home',
       component: HomeView,
       children: [
