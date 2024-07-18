@@ -42,55 +42,14 @@
           path: '/vueresume/home/system/role'
         }, {
           key: 'system3',
-          label: '菜单管理',
-          title: '菜单管理',
-          path: '/system/menu'
-        }, {
-          key: 'system4',
           label: '部门管理',
           title: '部门管理',
           path: '/vueresume/home/system/dept'
-        }, {
-          key: 'system5',
-          label: '字典管理',
-          title: '字典管理',
-          path: '/system/dept'
         }
       ]
     },
     {
       key: 'sub2',
-      icon: () => h(InboxOutlined),
-      label: '接口文档',
-      title: '接口文档',
-      children: [
-        {
-          key: 'apl',
-          label: 'Aplfox',
-          title: 'Aplfox'
-        }
-      ]
-    },
-    {
-      key: 'sub3',
-      icon: () => h(MailOutlined),
-      label: '平台文档',
-      title: '平台文档',
-      children: [
-        {
-          key: 'doc1',
-          label: '内嵌',
-          title: '内嵌',
-        },
-        {
-          key: 'doc2',
-          label: '外链',
-          title: '外链',
-        },
-      ],
-    },
-    {
-      key: 'sub4',
       icon: () => h(AppstoreOutlined),
       label: '组件封装',
       title: '组件封装',
@@ -123,7 +82,7 @@
       ],
     },
     {
-      key: 'sub5',
+      key: 'sub3',
       icon: () => h(AppstoreOutlined),
       label: '功能展示',
       title: '功能展示',
@@ -135,10 +94,10 @@
         }
       ],
     }, {
-      key: 'sub6',
+      key: 'sub4',
       icon: () => h(AppstoreOutlined),
       label: '敬请期待...',
-      title: '敬请期待...'
+      title: '敬请期待...',
     }
   ]);
   watch(
