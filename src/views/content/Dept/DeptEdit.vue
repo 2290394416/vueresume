@@ -29,6 +29,7 @@ watch(() =>props.show,(show) => {
   open.value = show
   if (props.edit) {
     getHigher(office.value)
+    form.value = props.edit
     form.value.higherOffice = higherOffice.value
   }
 })

@@ -106,7 +106,7 @@
   #home_chart {
     padding-top: 16px;
     width: 100%;
-    height: 500px;
+    height: 100vh;
     background-color: #fff;
   }
 </style>

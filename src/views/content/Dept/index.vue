@@ -147,7 +147,6 @@
     });
     //当勾选按钮框时，把它的 key 值记录下来
     const onSelectChange = (selectedRowKeys: Key[]) => {
-      console.log(selectedRowKeys)
       state.selectedRowKeys = selectedRowKeys;
     };
     //在勾选列表前面的删除标记时，会把这条数据的 key 值放入到这个 RowKeys 中
@@ -164,10 +163,12 @@
         addedTo(data, higher, obj)
       }
     }
+    //删除多选的数据
     function checkDel() {
       state.loading = true
       setTimeout(() => {
         state.selectedRowKeys.forEach((item) => {
+          updateCheck(newData.value, item)
           delData(newData.value, item)
         })
         data = newData.value
@@ -175,17 +176,27 @@
         state.selectedRowKeys = [];
       }, 1000);
     }
+    function updateCheck(data: Array<any>, key: any) {
+      data.forEach((item) => {
+        if(item.key === key) {
+          deleteOptions(item.name)
+        } else if (item.children) {
+          updateCheck(item.children, key)
+        }
+      })
+    }
 
     function onEdit(state: any, preHigher: any, higher: any, preKey: any) {
       //编辑分两种情况，上级部门发生变化的，上级部门没有发生变化的
+      //如果现在的层级 higher 不等于打开时的层级 preHigher 说明编辑改变了上级部门
       if (higher !== preHigher ) {
         delData(newData.value, preKey)
         addedTo(newData.value, higher, state)
       } 
     }
-    function onDelete(data: any) {
-      delData(newData.value, data.key)
-      deleteOptions(data.name)
+    function onDelete(props: any) {
+      delData(newData.value, props.key)
+      deleteOptions(props.name)
       data = newData.value
     }
     
@@ -247,7 +258,6 @@
           v-model:value="modelRef.status"
           style="width: 120px"
           :allowClear="true"
-          placeholder="全部"
         >
           <a-select-option value="启用">启用</a-select-option>
           <a-select-option value="禁用">禁用</a-select-option>
